@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/golang/glog"
 	"github.com/rh-ecosystem-edge/nvidia-ci/pkg/clients"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/api/core/v1"

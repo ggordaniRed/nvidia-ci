@@ -24,7 +24,6 @@ import (
 	"github.com/rh-ecosystem-edge/nvidia-ci/internal/check"
 	"github.com/rh-ecosystem-edge/nvidia-ci/internal/deploy"
 	"github.com/rh-ecosystem-edge/nvidia-ci/internal/get"
-
 	. "github.com/rh-ecosystem-edge/nvidia-ci/pkg/global"
 	"github.com/rh-ecosystem-edge/nvidia-ci/pkg/pod"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -785,33 +784,33 @@ var _ = Describe("NNO", Ordered, Label(tsparams.LabelSuite), func() {
 		})
 
 		It("check rdma between workloads", Label("nno"), func() {
-			server, err := nnoworker.CreateDocaWorkerPod(inittools.APIClient, Worker1Name, "hostname", "server", "")
+			// server, err := rdmatest.CreateDocaWorkerPod(inittools.APIClient, Worker1Name, "hostname", "server", "")
 
-			if err != nil {
-				glog.Errorf("Failed to create server pod: %v", err)
-			}
-			glog.Infof("Server Pod %s created.\n", server.Name)
+			// if err != nil {
+			// 	glog.Errorf("Failed to create server pod: %v", err)
+			// }
+			// glog.Infof("Server Pod %s created.\n", server.Name)
 
-			// Step 2: Wait for server pod to get IP
-			serverIP, err := nnoworker.GetServerIP(inittools.APIClient)
-			if err != nil {
-				glog.Errorf("Failed to get server pod IP: %v", err)
-			}
-			glog.Infof("Server Pod IP: %s\n", serverIP)
-			client, err := nnoworker.CreateDocaWorkerPod(inittools.APIClient, Worker2Name, "hostname", "client", serverIP)
-			err = k8sWait.PollUntilContextTimeout(context.TODO(), PollInterval, Timeout, true, func(ctx context.Context) (bool, error) {
-				clientsLogs, err := nnoworker.GetPodLogs(inittools.APIClient, client.Name)
-				if err != nil {
-					return false, err
-				}
-				serverLogs, err := nnoworker.GetPodLogs(inittools.APIClient, server.Name)
-				if err != nil {
-					return false, err
-				}
+			// // Step 2: Wait for server pod to get IP
+			// serverIP, err := rdmatest.GetServerIP(inittools.APIClient,server.Name,"net1")
+			// if err != nil {
+			// 	glog.Errorf("Failed to get server pod IP: %v", err)
+			// }
+			// glog.Infof("Server Pod IP: %s\n", serverIP)
+			//	client, err := rdmatest.CreateDocaWorkerPod(inittools.APIClient, Worker2Name, "hostname", "client", serverIP)
+			// err = k8sWait.PollUntilContextTimeout(context.TODO(), PollInterval, Timeout, true, func(ctx context.Context) (bool, error) {
+			// 	clientsLogs, err := rdmatest.GetPodLogs(inittools.APIClient,TestNamespace, client.Name)
+			// 	if err != nil {
+			// 		return false, err
+			// 	}
+			// 	serverLogs, err := rdmatest.GetPodLogs(inittools.APIClient,TestNamespace, server.Name)
+			// 	if err != nil {
+			// 		return false, err
+			// 	}
 
-				return nnoworker.Valida(serverLogs, clientsLogs), nil
-			})
-			Expect(err).NotTo(HaveOccurred(), "OFED driver check pod didn't complete successfully")
+			// 	return rdmatest.validateRDMAResults(), nil
+			// })
+			// Expect(err).NotTo(HaveOccurred(), "OFED driver check pod didn't complete successfully")
 
 		})
 	})

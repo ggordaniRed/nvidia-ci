@@ -1,0 +1,1980 @@
+test -s gpu-operator-must-gather.sh || (\
+    		SCRIPT_URL="https://raw.githubusercontent.com/NVIDIA/gpu-operator/v23.9.1/hack/must-gather.sh" && \
+    		if ! curl -SsL -o gpu-operator-must-gather.sh -L $SCRIPT_URL; then \
+    			echo "Failed to download must-gather script" >&2; \
+    			exit 1; \
+    		fi && \
+    		chmod +x gpu-operator-must-gather.sh \
+    	)
+Executing nvidiagpu test-runner script
+scripts/test-runner.sh
+PATH_TO_MUST_GATHER_SCRIPT=/home/ggordani/git/nvidia-ci/gpu-operator-must-gather.sh ginkgo -timeout=24h --keep-going --require-suite -r --trace --label-filter="nno,rdma-shared-dev" ./tests/nvidianetwork
+2025/06/30 17:54:44 Creating new GeneralConfig struct
+2025/06/30 17:54:44 Loading kube client config from path "/home/ggordani/doca7"
+I0630 17:54:44.425130  987013 config.go:40] Creating new NvidiaNetworkConfig
+Running Suite: NNO - /home/ggordani/git/nvidia-ci/tests/nvidianetwork
+[38;5;204m[nvidia-ci, nno, nno][0m 
+=====================================================================
+Random Seed: [1m1751295278[0m
+
+Will run [1m2[0m of [1m2[0m specs
+I0630 17:54:44.425456  987013 deploy-nno-test.go:129] env variable NVIDIANETWORK_CATALOGSOURCE is not set, using default NNO catalogsource 'certified-operators'
+I0630 17:54:44.425479  987013 deploy-nno-test.go:139] env variable NVIDIANETWORK_SUBSCRIPTION_CHANNEL is not set, will deploy latest channel
+I0630 17:54:44.425485  987013 deploy-nno-test.go:154] Flag to cleanup after test is set to env variable NVIDIANETWORK_CLEANUP value 'false'
+I0630 17:54:44.425493  987013 deploy-nno-test.go:159] env variable NVIDIANETWORK_OFED_DRIVER_VERSION is not set, will use default ofed driver version from CSV alm-examples section
+I0630 17:54:44.425500  987013 deploy-nno-test.go:169] env variable NVIDIANETWORK_OFED_REPOSITORY is not set, will use default ofed driver repository from CSV alm-examples section
+I0630 17:54:44.425508  987013 deploy-nno-test.go:184] macvlanNetworkName is set to env variable NVIDIANETWORK_MACVLANNETWORK_NAME value 'rdmashared-net'
+I0630 17:54:44.425517  987013 deploy-nno-test.go:196] macvlanNetworkIPAMRange is set to env variable NVIDIANETWORK_MACVLANNETWORK_IPAM_RANGE value '192.168.2.0/24'
+I0630 17:54:44.425528  987013 deploy-nno-test.go:208] macvlanNetworkIPAMGatway is set to env variable NVIDIANETWORK_MACVLANNETWORK_IPAM_GATEWAY value '192.168.2.1'
+I0630 17:54:44.425541  987013 deploy-nno-test.go:218] ipoibNetworkName is set to env variable NVIDIANETWORK_IPOIBNETWORK_NAME value 'example-ipoibnetwork'
+I0630 17:54:44.425556  987013 deploy-nno-test.go:230] ipoibNetworkIPAMRange is set to env variable NVIDIANETWORK_IPOIBNETWORK_IPAM_RANGE value '192.168.6.225/24'
+I0630 17:54:44.425572  987013 deploy-nno-test.go:242] ipoibNetworkIPAMExcludeIP1 is set to env variable NVIDIANETWORK_IPOIBNETWORK_IPAM_EXCLUDEIP1 value '192.168.6.229/30'
+I0630 17:54:44.425591  987013 deploy-nno-test.go:254] ipoibNetworkIPAMExcludeIP2 is set to env variable NVIDIANETWORK_IPOIBNETWORK_IPAM_EXCLUDEIP2 value '192.168.6.236/32'
+I0630 17:54:44.425610  987013 deploy-nno-test.go:266] rdmaClientHostname is set to env variable NVIDIANETWORK_RDMA_CLIENT_HOSTNAME value 'nvd-srv-13.nvidia.eng.rdu2.redhat.com'
+I0630 17:54:44.425630  987013 deploy-nno-test.go:278] rdmaServerHostname is set to env variable NVIDIANETWORK_RDMA_SERVER_HOSTNAME value 'nvd-srv-12.nvidia.eng.rdu2.redhat.com'
+I0630 17:54:44.425653  987013 deploy-nno-test.go:288] rdmaTestImage is set to env variable NVIDIANETWORK_RDMA_TEST_IMAGE value 'quay.io/wabouham/ecosys-nvidia/rdma-tools-aarch64:0.0.3'
+I0630 17:54:44.425675  987013 deploy-nno-test.go:300] rdmaLinkType is set to env variable NVIDIANETWORK_RDMA_WORKLOAD_NAMESPACE value 'default'
+I0630 17:54:44.425698  987013 deploy-nno-test.go:312] rdmaLinkType is set to env variable NVIDIANETWORK_RDMA_LINK_TYPE value 'ethernet'
+I0630 17:54:44.425722  987013 deploy-nno-test.go:324] rdmaMlxDevice is set to env variable NVIDIANETWORK_RDMA_MLX_DEVICE value 'mlx5_0'
+I0630 17:54:44.425747  987013 deploy-nno-test.go:334] mellanoxEthernetInterfaceName is set to env variable NVIDIANETWORK_MELLANOX_ETH_INTERFACE_NAME value 'rdma0'
+I0630 17:54:44.425772  987013 deploy-nno-test.go:344] mellanoxInfinibandInterfaceName is set to env variable NVIDIANETWORK_MELLANOX_IB_INTERFACE_NAME value 'ibp13s0'
+I0630 17:54:44.425801  987013 deploy-nno-test.go:362] env variable NVIDIANETWORK_DEPLOY_FROM_BUNDLE is set to false or is not set, will deploy Network Operator from catalogsource
+I0630 17:54:44.425832  987013 deploy-nno-test.go:368] env variable NVIDIANETWORK_SUBSCRIPTION_UPGRADE_TO_CHANNEL is not set, will not run the Upgrade Testcase
+I0630 17:54:44.425860  987013 deploy-nno-test.go:378] env variable NVIDIANETWORK_NNO_FALLBACK_CATALOGSOURCE_INDEX_IMAGE is set, and has value: 'registry.redhat.io/redhat/certified-operator-index:v4.17'
+I0630 17:54:44.425889  987013 deploy-nno-test.go:384] Setting flag to create custom Network Operator catalogsource from fall back index image to True
+I0630 17:54:44.425918  987013 deploy-nno-test.go:390] Setting custom NNO catalogsource name to 'certified-operators-custom'
+I0630 17:54:44.425947  987013 deploy-nno-test.go:400] env variable NVIDIANETWORK_NFD_FALLBACK_CATALOGSOURCE_INDEX_IMAGE is set, and has value: 'registry.redhat.io/redhat/redhat-operator-index:v4.17'
+I0630 17:54:44.425977  987013 deploy-nno-test.go:406] Setting flag to create custom NFD operator catalogsource from fall back index image to True
+I0630 17:54:44.426007  987013 deploy-nno-test.go:412] Setting custom NFD catalogsource name to 'redhat-operators-custom'
+I0630 17:54:45.173443  987013 deploy-nno-test.go:423] Current OpenShift cluster version is: '4.18.11'
+I0630 17:54:45.173910  987013 deployment.go:98] Pulling existing deployment name: nfd-controller-manager under namespace: openshift-nfd
+I0630 17:54:45.173943  987013 deployment.go:529] Checking if deployment nfd-controller-manager exists in namespace openshift-nfd
+I0630 17:54:45.381290  987013 check.go:99] Pulled NFD operator deployment is:  nfd-controller-manager 
+I0630 17:54:45.381313  987013 deployment.go:98] Pulling existing deployment name: nfd-master under namespace: openshift-nfd
+I0630 17:54:45.381319  987013 deployment.go:529] Checking if deployment nfd-master exists in namespace openshift-nfd
+I0630 17:54:45.534275  987013 check.go:111] Pulled NFD operand master deployment:  nfd-master 
+I0630 17:54:45.534322  987013 deployment.go:470] Running periodic check until deployment nfd-controller-manager in namespace openshift-nfd is ready
+I0630 17:54:45.534404  987013 deployment.go:529] Checking if deployment nfd-controller-manager exists in namespace openshift-nfd
+I0630 17:54:45.989950  987013 deployment.go:470] Running periodic check until deployment nfd-master in namespace openshift-nfd is ready
+I0630 17:54:45.989966  987013 deployment.go:529] Checking if deployment nfd-master exists in namespace openshift-nfd
+I0630 17:54:46.401292  987013 check.go:115] NFD operator 'nfd-controller-manager' and operand 'nfd-master' deployments are ready
+I0630 17:54:46.401409  987013 utils.go:32] The check for ready NFD deployments is: true
+I0630 17:54:46.401442  987013 utils.go:33] NFD operators and operands are already installed on this cluster
+I0630 17:54:46.401736  987013 list.go:35] Listing all node resources with the options {{ } node-role.kubernetes.io/worker=  false false   <nil> 0  <nil>}
+I0630 17:54:46.612008  987013 check.go:43] Found label feature.node.kubernetes.io/system-os_release.ID that contains feature.node.kubernetes.io/system-os_release.ID with label value rhcos on node nvd-srv-12.nvidia.eng.rdu2.redhat.com
+I0630 17:54:46.612029  987013 check.go:43] Found label feature.node.kubernetes.io/system-os_release.ID that contains feature.node.kubernetes.io/system-os_release.ID with label value rhcos on node nvd-srv-13.nvidia.eng.rdu2.redhat.com
+I0630 17:54:46.612033  987013 check.go:43] Found label feature.node.kubernetes.io/system-os_release.ID that contains feature.node.kubernetes.io/system-os_release.ID with label value rhcos on node nvd-srv-21-vm-4.nvidia.eng.rdu2.redhat.com
+I0630 17:54:46.612036  987013 check.go:43] Found label feature.node.kubernetes.io/system-os_release.ID that contains feature.node.kubernetes.io/system-os_release.ID with label value rhcos on node nvd-srv-21-vm-5.nvidia.eng.rdu2.redhat.com
+I0630 17:54:46.612039  987013 check.go:43] Found label feature.node.kubernetes.io/system-os_release.ID that contains feature.node.kubernetes.io/system-os_release.ID with label value rhcos on node nvd-srv-21-vm-6.nvidia.eng.rdu2.redhat.com
+I0630 17:54:46.612049  987013 checknfd.go:17] The check for NFD label returned: true
+I0630 17:54:46.612054  987013 deployment.go:98] Pulling existing deployment name: nfd-controller-manager under namespace: openshift-nfd
+I0630 17:54:46.612064  987013 deployment.go:529] Checking if deployment nfd-controller-manager exists in namespace openshift-nfd
+I0630 17:54:46.810549  987013 check.go:99] Pulled NFD operator deployment is:  nfd-controller-manager 
+I0630 17:54:46.810594  987013 deployment.go:98] Pulling existing deployment name: nfd-master under namespace: openshift-nfd
+I0630 17:54:46.810612  987013 deployment.go:529] Checking if deployment nfd-master exists in namespace openshift-nfd
+I0630 17:54:47.219879  987013 check.go:111] Pulled NFD operand master deployment:  nfd-master 
+I0630 17:54:47.219940  987013 deployment.go:470] Running periodic check until deployment nfd-controller-manager in namespace openshift-nfd is ready
+I0630 17:54:47.219963  987013 deployment.go:529] Checking if deployment nfd-controller-manager exists in namespace openshift-nfd
+I0630 17:54:47.577921  987013 deployment.go:470] Running periodic check until deployment nfd-master in namespace openshift-nfd is ready
+I0630 17:54:47.577938  987013 deployment.go:529] Checking if deployment nfd-master exists in namespace openshift-nfd
+I0630 17:54:47.883523  987013 check.go:115] NFD operator 'nfd-controller-manager' and operand 'nfd-master' deployments are ready
+I0630 17:54:47.883579  987013 checknfd.go:21] The check for NFD deployments ready returned: true
+I0630 17:54:47.883678  987013 list.go:35] Listing all node resources with the options {{ } node-role.kubernetes.io/worker=  false false   <nil> 0  <nil>}
+I0630 17:54:48.148469  987013 check.go:76] Found label 'feature.node.kubernetes.io/pci-15b3.present' with label value 'true' on node 'nvd-srv-12.nvidia.eng.rdu2.redhat.com'
+I0630 17:54:48.148490  987013 deploy-nno-test.go:478] The check for Nvidia Network label returned: true
+I0630 17:54:48.148503  987013 deploy-nno-test.go:489] Getting cluster architecture from nodes with networkWorkerNodeSelector: map[feature.node.kubernetes.io/pci-15b3.present:true node-role.kubernetes.io/worker:]
+I0630 17:54:48.148523  987013 list.go:35] Listing all node resources with the options {{ } feature.node.kubernetes.io/pci-15b3.present=true,node-role.kubernetes.io/worker=  false false   <nil> 0  <nil>}
+I0630 17:54:48.554245  987013 get.go:84] Found label 'kubernetes.io/arch' with label value 'arm64' on node 'nvd-srv-12.nvidia.eng.rdu2.redhat.com'
+I0630 17:54:48.554270  987013 deploy-nno-test.go:495] cluster architecture for network enabled worker node is: arm64
+I0630 17:54:48.554288  987013 deploy-nno-test.go:508] Deploying Network Operator from catalogsource
+I0630 17:54:48.554299  987013 deploy-nno-test.go:511] Using NNO catalogsource 'certified-operators'
+I0630 17:54:48.554305  987013 packagemanifest.go:123] Pulling existing PackageManifest name nvidia-network-operator in namespace openshift-marketplace and from catalog certified-operators
+I0630 17:54:48.554320  987013 packagemanifest.go:134] Listing PackageManifests in the namespace openshift-marketplace with the options {{ } catalog=certified-operators metadata.name=nvidia-network-operator false false   <nil> 0  <nil>}
+I0630 17:54:48.713681  987013 deploy-nno-test.go:575] NNO packagemanifest 'nvidia-network-operator' was found in the default catalog 'certified-operators'
+I0630 17:54:48.713888  987013 deploy-nno-test.go:582] NNO channel 'v25.4' was retrieved from NNO packagemanifest
+I0630 17:54:48.713957  987013 namespace.go:38] Initializing new namespace structure with the following param: nvidia-network-operator
+I0630 17:54:48.713972  987013 namespace.go:202] Checking if namespace nvidia-network-operator exists
+I0630 17:54:48.866045  987013 deploy-nno-test.go:591] The namespace 'nvidia-network-operator' already exists
+I0630 17:54:48.866116  987013 operatorgroup.go:32] Initializing new OperatorGroupBuilder structure with the following params: nno-og, nvidia-network-operator
+I0630 17:54:48.866126  987013 operatorgroup.go:88] Checking if OperatorGroup nno-og exists in namespace nvidia-network-operator
+I0630 17:54:49.062008  987013 deploy-nno-test.go:647] The ogBuilder that exists has name:  nno-og
+I0630 17:54:49.062157  987013 subscription.go:31] Initializing new SubscriptionBuilder structure with the following params, subName: nno-subscription, subNamespace: nvidia-network-operator, catalogSource: certified-operators, catalogSourceNamespace: openshift-marketplace, packageName: nvidia-network-operator 
+I0630 17:54:49.062206  987013 deploy-nno-test.go:674] Setting the NNO subscription channel to default channel: 'v25.4'
+I0630 17:54:49.062272  987013 subscription.go:90] Defining Subscription builder object with channel: v25.4
+I0630 17:54:49.062290  987013 subscription.go:134] Defining Subscription builder object with installPlanApproval: Automatic
+I0630 17:54:49.062332  987013 deploy-nno-test.go:681] Creating the subscription, i.e Deploy the Network operator
+I0630 17:54:49.062545  987013 subscription.go:159] Creating the Subscription nno-subscription in namespace nvidia-network-operator
+I0630 17:54:49.062568  987013 subscription.go:177] Checking if Subscription nno-subscription exists in namespace nvidia-network-operator
+I0630 17:54:49.259632  987013 deploy-nno-test.go:687] Newly created subscription: nno-subscription was successfully created
+I0630 17:54:49.259735  987013 subscription.go:177] Checking if Subscription nno-subscription exists in namespace nvidia-network-operator
+I0630 17:54:49.440884  987013 deploy-nno-test.go:691] The newly created NNO subscription 'nno-subscription' in namespace 'nvidia-network-operator' has current CSV  'nvidia-network-operator.v25.4.0'
+I0630 17:54:49.441043  987013 deploy-nno-test.go:706] Sleep for 2 minutes to allow the Network Operator deployment to be created
+I0630 17:57:19.445598  987013 deployment.go:98] Pulling existing deployment name: nvidia-network-operator-controller-manager under namespace: nvidia-network-operator
+I0630 17:57:19.445716  987013 deployment.go:529] Checking if deployment nvidia-network-operator-controller-manager exists in namespace nvidia-network-operator
+I0630 17:57:20.269969  987013 deployment.go:529] Checking if deployment nvidia-network-operator-controller-manager exists in namespace nvidia-network-operator
+I0630 17:57:20.514777  987013 wait.go:94] Deployment 'nvidia-network-operator-controller-manager' in namespace 'nvidia-network-operator' has been created
+I0630 17:57:20.514918  987013 deployment.go:98] Pulling existing deployment name: nvidia-network-operator-controller-manager under namespace: nvidia-network-operator
+I0630 17:57:20.514941  987013 deployment.go:529] Checking if deployment nvidia-network-operator-controller-manager exists in namespace nvidia-network-operator
+I0630 17:57:20.820685  987013 deploy-nno-test.go:722] Pulled Network operator deployment is:  nvidia-network-operator-controller-manager 
+I0630 17:57:20.820796  987013 deployment.go:470] Running periodic check until deployment nvidia-network-operator-controller-manager in namespace nvidia-network-operator is ready
+I0630 17:57:20.820814  987013 deployment.go:529] Checking if deployment nvidia-network-operator-controller-manager exists in namespace nvidia-network-operator
+I0630 17:57:21.231525  987013 deploy-nno-test.go:726] Pulled Network operator deployment 'nvidia-network-operator-controller-manager' is Ready
+I0630 17:57:21.231738  987013 clusterserviceversionlist.go:38] Listing clusterserviceversion in the namespace nvidia-network-operator
+I0630 17:57:21.540819  987013 deploy-nno-test.go:740] Deployed ClusterServiceVersion is: 'nvidia-network-operator.v25.4.0
+I0630 17:57:21.540859  987013 deploy-nno-test.go:745] ClusterServiceVersion version to be written in the operator version file is: '25.4.0'
+I0630 17:57:21.540958  987013 deploy-nno-test.go:753] Waiting for ClusterServiceVersion 'nvidia-network-operator.v25.4.0' to be in Succeeded phase
+I0630 17:57:21.540992  987013 clusterserviceversion.go:33] Pulling existing clusterserviceversion name nvidia-network-operator.v25.4.0 in namespace nvidia-network-operator
+I0630 17:57:21.540999  987013 clusterserviceversion.go:68] Checking if clusterserviceversion nvidia-network-operator.v25.4.0 exists
+I0630 17:57:21.881361  987013 wait.go:62] ClusterServiceVersion nvidia-network-operator.v25.4.0 in now in Succeeded state
+I0630 17:57:21.881394  987013 deploy-nno-test.go:757] error waiting for ClusterServiceVersion '%s' to be in Succeeded phase:  %v nvidia-network-operator.v25.4.0<nil>
+I0630 17:57:21.881446  987013 clusterserviceversion.go:33] Pulling existing clusterserviceversion name nvidia-network-operator.v25.4.0 in namespace nvidia-network-operator
+I0630 17:57:21.881455  987013 clusterserviceversion.go:68] Checking if clusterserviceversion nvidia-network-operator.v25.4.0 exists
+I0630 17:57:22.227320  987013 deploy-nno-test.go:766] clusterCSV from cluster lastUpdatedTime is : 2025-06-30 15:06:35 +0300 IDT 
+I0630 17:57:22.227482  987013 deploy-nno-test.go:769] clusterCSV from cluster Phase is : "Succeeded"
+I0630 17:57:22.227645  987013 clusterserviceversion.go:111] Extracting the 'alm-examples' section from clusterserviceversion nvidia-network-operator.v25.4.0 in namespace nvidia-network-operator
+I0630 17:57:22.227663  987013 clusterserviceversion.go:68] Checking if clusterserviceversion nvidia-network-operator.v25.4.0 exists
+I0630 17:57:22.564343  987013 deploy-nno-test.go:787] almExamples block from clusterCSV  is : [
+  {
+    "apiVersion": "mellanox.com/v1alpha1",
+    "kind": "HostDeviceNetwork",
+    "metadata": {
+      "name": "example-hostdevice-network"
+    },
+    "spec": {
+      "ipam": "{\n  \"type\": \"whereabouts\",\n  \"range\": \"192.168.3.225/28\",\n  \"exclude\": [\n   \"192.168.3.229/30\",\n   \"192.168.3.236/32\"\n  ]\n}\n",
+      "networkNamespace": "default",
+      "resourceName": "hostdev"
+    }
+  },
+  {
+    "apiVersion": "mellanox.com/v1alpha1",
+    "kind": "IPoIBNetwork",
+    "metadata": {
+      "name": "example-ipoibnetwork"
+    },
+    "spec": {
+      "ipam": "{\n  \"type\": \"whereabouts\",\n  \"range\": \"192.168.6.225/28\",\n  \"exclude\": [\n   \"192.168.6.229/30\",\n   \"192.168.6.236/32\"\n  ]\n}\n",
+      "master": "ibs3f1",
+      "networkNamespace": "default"
+    }
+  },
+  {
+    "apiVersion": "mellanox.com/v1alpha1",
+    "kind": "MacvlanNetwork",
+    "metadata": {
+      "name": "example-macvlannetwork"
+    },
+    "spec": {
+      "ipam": "{\n  \"type\": \"whereabouts\",\n  \"range\": \"192.168.2.225/24\",\n  \"exclude\": [\n   \"192.168.2.229/30\",\n   \"192.168.2.236/32\"\n  ]\n}\n",
+      "master": "ens2f0",
+      "mode": "bridge",
+      "mtu": 1500,
+      "networkNamespace": "default"
+    }
+  },
+  {
+    "apiVersion": "mellanox.com/v1alpha1",
+    "kind": "NicClusterPolicy",
+    "metadata": {
+      "name": "nic-cluster-policy"
+    },
+    "spec": {
+      "ofedDriver": {
+        "image": "doca-driver",
+        "livenessProbe": {
+          "initialDelaySeconds": 30,
+          "periodSeconds": 30
+        },
+        "readinessProbe": {
+          "initialDelaySeconds": 10,
+          "periodSeconds": 30
+        },
+        "repository": "nvcr.io/nvidia/mellanox",
+        "startupProbe": {
+          "initialDelaySeconds": 10,
+          "periodSeconds": 20
+        },
+        "terminationGracePeriodSeconds": 300,
+        "upgradePolicy": {
+          "autoUpgrade": true,
+          "drain": {
+            "deleteEmptyDir": true,
+            "enable": true,
+            "force": true,
+            "podSelector": "",
+            "timeoutSeconds": 300
+          },
+          "maxParallelUpgrades": 1
+        },
+        "version": "25.04-0.6.1.0-2"
+      },
+      "rdmaSharedDevicePlugin": {
+        "config": "{\n  \"configList\": [\n    {\n      \"resourceName\": \"rdma_shared_device_a\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"vendors\": [\"15b3\"]\n      }\n    }\n  ]\n}\n",
+        "image": "k8s-rdma-shared-dev-plugin",
+        "repository": "ghcr.io/mellanox",
+        "version": "sha256:1eb5ab7f4b6f0cf89c954cf7ac8eb2e6fb2290a4f5f57417136a5302f20b12c8"
+      }
+    }
+  }
+] 
+I0630 17:57:22.564414  987013 deploy-nno-test.go:790] Creating NicClusterPolicy from CSV almExamples
+I0630 17:57:22.564441  987013 nicclusterpolicy.go:33] Initializing new NicClusterPolicyBuilder structure from almExample string
+I0630 17:57:22.564777  987013 nicclusterpolicy.go:58] Initializing new NicClusterPolicyBuilder structure from almExample string with NicClusterPolicy name: nic-cluster-policy
+I0630 17:57:22.564807  987013 deploy-nno-test.go:796] Check if NicClusterPolicy ofed driver version and repository need to be updated from values in env vars
+I0630 17:57:22.564853  987013 deploy-nno-test.go:810] Add extra env variables to the ofedDriver in NicClusterPolicy for amd64 clusters
+I0630 17:57:22.564881  987013 deploy-nno-test.go:835] Cluster architecture is not 'amd64', skipping addingextra env variables to the ofedDriver env spec in NicClusterPolicy 
+I0630 17:57:22.564929  987013 deploy-nno-test.go:840] Building the new config data structure for NicClusterPolicy rdmaSharedDevicePlugin to use Eth and IB interface names passed in env vars
+{
+  "configList": [
+    {
+      "resourceName": "rdma_shared_device_ib",
+      "rdmaHcaMax": 63,
+      "selectors": {
+        "ifNames": [
+          "ibp13s0"
+        ]
+      }
+    },
+    {
+      "resourceName": "rdma_shared_device_eth",
+      "rdmaHcaMax": 63,
+      "selectors": {
+        "ifNames": [
+          "rdma0"
+        ]
+      }
+    }
+  ]
+}
+I0630 17:57:22.565027  987013 deploy-nno-test.go:910] New config data structure for NicClusterPolicy rdmaSharedDevicePlugin for Ethernet 'rdma0' and IB 'ibp13s0' interfaces from env vars:
+I0630 17:57:22.565101  987013 nicclusterpolicy.go:177] Creating the NicClusterPolicy nic-cluster-policy
+I0630 17:57:22.565108  987013 nicclusterpolicy.go:135] Checking if NicClusterPolicy nic-cluster-policy exists
+I0630 17:57:22.565112  987013 nicclusterpolicy.go:82] Collecting NicClusterPolicy object nic-cluster-policy
+I0630 17:57:22.969885  987013 deploy-nno-test.go:921] NicClusterPolicy 'nic-cluster-policy' is successfully created
+I0630 17:57:22.970123  987013 nicclusterpolicy.go:102] Pulling existing nicClusterPolicy name: nic-cluster-policy
+I0630 17:57:22.970141  987013 nicclusterpolicy.go:135] Checking if NicClusterPolicy nic-cluster-policy exists
+I0630 17:57:22.970154  987013 nicclusterpolicy.go:82] Collecting NicClusterPolicy object nic-cluster-policy
+I0630 17:57:23.126589  987013 deploy-nno-test.go:940] The NicClusterPolicy just created has name:  nic-cluster-policy
+I0630 17:57:23.126741  987013 deploy-nno-test.go:942] The NicClusterPolicy just created marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "nic-cluster-policy",
+   "uid": "194a240c-5801-49d5-bbd8-78c299e04fec",
+   "resourceVersion": "21346950",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:08:55Z",
+   "managedFields": [
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:08:55Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ofedDriver": {
+        ".": {},
+        "f:forcePrecompiled": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:livenessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:readinessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:repository": {},
+        "f:startupProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:terminationGracePeriodSeconds": {},
+        "f:upgradePolicy": {
+         ".": {},
+         "f:autoUpgrade": {},
+         "f:drain": {
+          ".": {},
+          "f:deleteEmptyDir": {},
+          "f:enable": {},
+          "f:force": {},
+          "f:timeoutSeconds": {}
+         },
+         "f:maxParallelUpgrades": {},
+         "f:safeLoad": {}
+        },
+        "f:version": {}
+       },
+       "f:rdmaSharedDevicePlugin": {
+        ".": {},
+        "f:config": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:repository": {},
+        "f:version": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:01Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:appliedStates": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    }
+   ]
+  },
+  "spec": {
+   "ofedDriver": {
+    "image": "doca-driver",
+    "repository": "nvcr.io/nvidia/mellanox",
+    "version": "25.04-0.6.1.0-2",
+    "imagePullSecrets": [],
+    "startupProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 20
+    },
+    "livenessProbe": {
+     "initialDelaySeconds": 30,
+     "periodSeconds": 30
+    },
+    "readinessProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 30
+    },
+    "upgradePolicy": {
+     "autoUpgrade": true,
+     "maxParallelUpgrades": 1,
+     "drain": {
+      "enable": true,
+      "force": true,
+      "timeoutSeconds": 300,
+      "deleteEmptyDir": true
+     }
+    }
+   },
+   "rdmaSharedDevicePlugin": {
+    "image": "k8s-rdma-shared-dev-plugin",
+    "repository": "ghcr.io/mellanox",
+    "version": "sha256:1eb5ab7f4b6f0cf89c954cf7ac8eb2e6fb2290a4f5f57417136a5302f20b12c8",
+    "imagePullSecrets": [],
+    "config": "{\n  \"configList\": [\n    {\n      \"resourceName\": \"rdma_shared_device_ib\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"ibp13s0\"\n        ]\n      }\n    },\n    {\n      \"resourceName\": \"rdma_shared_device_eth\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"rdma0\"\n        ]\n      }\n    }\n  ]\n}"
+   }
+  },
+  "status": {
+   "state": "ready",
+   "appliedStates": [
+    {
+     "name": "state-multus-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-container-networking-plugins",
+     "state": "ignore"
+    },
+    {
+     "name": "state-ipoib-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-whereabouts-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-OFED",
+     "state": "ready"
+    },
+    {
+     "name": "state-SRIOV-device-plugin",
+     "state": "ignore"
+    },
+    {
+     "name": "state-RDMA-device-plugin",
+     "state": "ready"
+    },
+    {
+     "name": "state-ib-kubernetes",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nv-ipam-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-feature-discovery",
+     "state": "ignore"
+    },
+    {
+     "name": "state-doca-telemetry-service",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-configuration-operator",
+     "state": "ignore"
+    },
+    {
+     "name": "state-spectrum-x-operator",
+     "state": "ignore"
+    }
+   ]
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "nic-cluster-policy",
+   "uid": "194a240c-5801-49d5-bbd8-78c299e04fec",
+   "resourceVersion": "21346950",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:08:55Z",
+   "managedFields": [
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:08:55Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ofedDriver": {
+        ".": {},
+        "f:forcePrecompiled": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:livenessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:readinessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:repository": {},
+        "f:startupProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:terminationGracePeriodSeconds": {},
+        "f:upgradePolicy": {
+         ".": {},
+         "f:autoUpgrade": {},
+         "f:drain": {
+          ".": {},
+          "f:deleteEmptyDir": {},
+          "f:enable": {},
+          "f:force": {},
+          "f:timeoutSeconds": {}
+         },
+         "f:maxParallelUpgrades": {},
+         "f:safeLoad": {}
+        },
+        "f:version": {}
+       },
+       "f:rdmaSharedDevicePlugin": {
+        ".": {},
+        "f:config": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:repository": {},
+        "f:version": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:01Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:appliedStates": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    }
+   ]
+  },
+  "spec": {
+   "ofedDriver": {
+    "image": "doca-driver",
+    "repository": "nvcr.io/nvidia/mellanox",
+    "version": "25.04-0.6.1.0-2",
+    "imagePullSecrets": [],
+    "startupProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 20
+    },
+    "livenessProbe": {
+     "initialDelaySeconds": 30,
+     "periodSeconds": 30
+    },
+    "readinessProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 30
+    },
+    "upgradePolicy": {
+     "autoUpgrade": true,
+     "maxParallelUpgrades": 1,
+     "drain": {
+      "enable": true,
+      "force": true,
+      "timeoutSeconds": 300,
+      "deleteEmptyDir": true
+     }
+    }
+   },
+   "rdmaSharedDevicePlugin": {
+    "image": "k8s-rdma-shared-dev-plugin",
+    "repository": "ghcr.io/mellanox",
+    "version": "sha256:1eb5ab7f4b6f0cf89c954cf7ac8eb2e6fb2290a4f5f57417136a5302f20b12c8",
+    "imagePullSecrets": [],
+    "config": "{\n  \"configList\": [\n    {\n      \"resourceName\": \"rdma_shared_device_ib\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"ibp13s0\"\n        ]\n      }\n    },\n    {\n      \"resourceName\": \"rdma_shared_device_eth\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"rdma0\"\n        ]\n      }\n    }\n  ]\n}"
+   }
+  },
+  "status": {
+   "state": "ready",
+   "appliedStates": [
+    {
+     "name": "state-multus-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-container-networking-plugins",
+     "state": "ignore"
+    },
+    {
+     "name": "state-ipoib-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-whereabouts-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-OFED",
+     "state": "ready"
+    },
+    {
+     "name": "state-SRIOV-device-plugin",
+     "state": "ignore"
+    },
+    {
+     "name": "state-RDMA-device-plugin",
+     "state": "ready"
+    },
+    {
+     "name": "state-ib-kubernetes",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nv-ipam-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-feature-discovery",
+     "state": "ignore"
+    },
+    {
+     "name": "state-doca-telemetry-service",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-configuration-operator",
+     "state": "ignore"
+    },
+    {
+     "name": "state-spectrum-x-operator",
+     "state": "ignore"
+    }
+   ]
+  }
+ }
+}
+I0630 17:57:23.126973  987013 deploy-nno-test.go:950] Waiting for NicClusterPolicy to be ready
+I0630 17:57:23.127181  987013 nicclusterpolicy.go:102] Pulling existing nicClusterPolicy name: nic-cluster-policy
+I0630 17:57:23.127209  987013 nicclusterpolicy.go:135] Checking if NicClusterPolicy nic-cluster-policy exists
+I0630 17:57:23.127230  987013 nicclusterpolicy.go:82] Collecting NicClusterPolicy object nic-cluster-policy
+I0630 17:57:23.279059  987013 networkwait.go:30] NicClusterPolicy nic-cluster-policy in now in ready state
+I0630 17:57:23.279120  987013 deploy-nno-test.go:954] error waiting for NicClusterPolicy to be Ready:  <nil> 
+I0630 17:57:23.279331  987013 nicclusterpolicy.go:102] Pulling existing nicClusterPolicy name: nic-cluster-policy
+I0630 17:57:23.279375  987013 nicclusterpolicy.go:135] Checking if NicClusterPolicy nic-cluster-policy exists
+I0630 17:57:23.279387  987013 nicclusterpolicy.go:82] Collecting NicClusterPolicy object nic-cluster-policy
+I0630 17:57:23.432270  987013 deploy-nno-test.go:967] The ready NicClusterPolicy just has name:  nic-cluster-policy
+I0630 17:57:23.432453  987013 deploy-nno-test.go:969] The ready NicClusterPolicy just marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "nic-cluster-policy",
+   "uid": "194a240c-5801-49d5-bbd8-78c299e04fec",
+   "resourceVersion": "21346950",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:08:55Z",
+   "managedFields": [
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:08:55Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ofedDriver": {
+        ".": {},
+        "f:forcePrecompiled": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:livenessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:readinessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:repository": {},
+        "f:startupProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:terminationGracePeriodSeconds": {},
+        "f:upgradePolicy": {
+         ".": {},
+         "f:autoUpgrade": {},
+         "f:drain": {
+          ".": {},
+          "f:deleteEmptyDir": {},
+          "f:enable": {},
+          "f:force": {},
+          "f:timeoutSeconds": {}
+         },
+         "f:maxParallelUpgrades": {},
+         "f:safeLoad": {}
+        },
+        "f:version": {}
+       },
+       "f:rdmaSharedDevicePlugin": {
+        ".": {},
+        "f:config": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:repository": {},
+        "f:version": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:01Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:appliedStates": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    }
+   ]
+  },
+  "spec": {
+   "ofedDriver": {
+    "image": "doca-driver",
+    "repository": "nvcr.io/nvidia/mellanox",
+    "version": "25.04-0.6.1.0-2",
+    "imagePullSecrets": [],
+    "startupProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 20
+    },
+    "livenessProbe": {
+     "initialDelaySeconds": 30,
+     "periodSeconds": 30
+    },
+    "readinessProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 30
+    },
+    "upgradePolicy": {
+     "autoUpgrade": true,
+     "maxParallelUpgrades": 1,
+     "drain": {
+      "enable": true,
+      "force": true,
+      "timeoutSeconds": 300,
+      "deleteEmptyDir": true
+     }
+    }
+   },
+   "rdmaSharedDevicePlugin": {
+    "image": "k8s-rdma-shared-dev-plugin",
+    "repository": "ghcr.io/mellanox",
+    "version": "sha256:1eb5ab7f4b6f0cf89c954cf7ac8eb2e6fb2290a4f5f57417136a5302f20b12c8",
+    "imagePullSecrets": [],
+    "config": "{\n  \"configList\": [\n    {\n      \"resourceName\": \"rdma_shared_device_ib\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"ibp13s0\"\n        ]\n      }\n    },\n    {\n      \"resourceName\": \"rdma_shared_device_eth\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"rdma0\"\n        ]\n      }\n    }\n  ]\n}"
+   }
+  },
+  "status": {
+   "state": "ready",
+   "appliedStates": [
+    {
+     "name": "state-multus-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-container-networking-plugins",
+     "state": "ignore"
+    },
+    {
+     "name": "state-ipoib-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-whereabouts-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-OFED",
+     "state": "ready"
+    },
+    {
+     "name": "state-SRIOV-device-plugin",
+     "state": "ignore"
+    },
+    {
+     "name": "state-RDMA-device-plugin",
+     "state": "ready"
+    },
+    {
+     "name": "state-ib-kubernetes",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nv-ipam-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-feature-discovery",
+     "state": "ignore"
+    },
+    {
+     "name": "state-doca-telemetry-service",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-configuration-operator",
+     "state": "ignore"
+    },
+    {
+     "name": "state-spectrum-x-operator",
+     "state": "ignore"
+    }
+   ]
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "nic-cluster-policy",
+   "uid": "194a240c-5801-49d5-bbd8-78c299e04fec",
+   "resourceVersion": "21346950",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:08:55Z",
+   "managedFields": [
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:08:55Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ofedDriver": {
+        ".": {},
+        "f:forcePrecompiled": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:livenessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:readinessProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:repository": {},
+        "f:startupProbe": {
+         ".": {},
+         "f:initialDelaySeconds": {},
+         "f:periodSeconds": {}
+        },
+        "f:terminationGracePeriodSeconds": {},
+        "f:upgradePolicy": {
+         ".": {},
+         "f:autoUpgrade": {},
+         "f:drain": {
+          ".": {},
+          "f:deleteEmptyDir": {},
+          "f:enable": {},
+          "f:force": {},
+          "f:timeoutSeconds": {}
+         },
+         "f:maxParallelUpgrades": {},
+         "f:safeLoad": {}
+        },
+        "f:version": {}
+       },
+       "f:rdmaSharedDevicePlugin": {
+        ".": {},
+        "f:config": {},
+        "f:image": {},
+        "f:imagePullSecrets": {},
+        "f:repository": {},
+        "f:version": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:01Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:appliedStates": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    }
+   ]
+  },
+  "spec": {
+   "ofedDriver": {
+    "image": "doca-driver",
+    "repository": "nvcr.io/nvidia/mellanox",
+    "version": "25.04-0.6.1.0-2",
+    "imagePullSecrets": [],
+    "startupProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 20
+    },
+    "livenessProbe": {
+     "initialDelaySeconds": 30,
+     "periodSeconds": 30
+    },
+    "readinessProbe": {
+     "initialDelaySeconds": 10,
+     "periodSeconds": 30
+    },
+    "upgradePolicy": {
+     "autoUpgrade": true,
+     "maxParallelUpgrades": 1,
+     "drain": {
+      "enable": true,
+      "force": true,
+      "timeoutSeconds": 300,
+      "deleteEmptyDir": true
+     }
+    }
+   },
+   "rdmaSharedDevicePlugin": {
+    "image": "k8s-rdma-shared-dev-plugin",
+    "repository": "ghcr.io/mellanox",
+    "version": "sha256:1eb5ab7f4b6f0cf89c954cf7ac8eb2e6fb2290a4f5f57417136a5302f20b12c8",
+    "imagePullSecrets": [],
+    "config": "{\n  \"configList\": [\n    {\n      \"resourceName\": \"rdma_shared_device_ib\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"ibp13s0\"\n        ]\n      }\n    },\n    {\n      \"resourceName\": \"rdma_shared_device_eth\",\n      \"rdmaHcaMax\": 63,\n      \"selectors\": {\n        \"ifNames\": [\n          \"rdma0\"\n        ]\n      }\n    }\n  ]\n}"
+   }
+  },
+  "status": {
+   "state": "ready",
+   "appliedStates": [
+    {
+     "name": "state-multus-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-container-networking-plugins",
+     "state": "ignore"
+    },
+    {
+     "name": "state-ipoib-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-whereabouts-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-OFED",
+     "state": "ready"
+    },
+    {
+     "name": "state-SRIOV-device-plugin",
+     "state": "ignore"
+    },
+    {
+     "name": "state-RDMA-device-plugin",
+     "state": "ready"
+    },
+    {
+     "name": "state-ib-kubernetes",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nv-ipam-cni",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-feature-discovery",
+     "state": "ignore"
+    },
+    {
+     "name": "state-doca-telemetry-service",
+     "state": "ignore"
+    },
+    {
+     "name": "state-nic-configuration-operator",
+     "state": "ignore"
+    },
+    {
+     "name": "state-spectrum-x-operator",
+     "state": "ignore"
+    }
+   ]
+  }
+ }
+}
+I0630 17:57:23.432687  987013 deploy-nno-test.go:977] Creating MacvlanNetwork from CSV almExamples
+I0630 17:57:23.432804  987013 macvlannetwork.go:33] Initializing new MacvlanNetworkBuilder  structure from almExample string
+I0630 17:57:23.433107  987013 macvlannetwork.go:58] Initializing new MacvlanNetworkBuilder  structure from almExample string with MacvlanNetwork name: example-macvlannetwork
+I0630 17:57:23.433209  987013 deploy-nno-test.go:982] Updating MacvlanNetworkBuilder object value passed in env variable 'rdmashared-net'
+{"type": "whereabouts", "range": "192.168.2.0/24", "gateway": "192.168.2.1"}
+I0630 17:57:23.433422  987013 deploy-nno-test.go:987] Updating MacvlanNetworkBuilder object ipam and master with values passed in env variables
+I0630 17:57:23.433674  987013 macvlannetwork.go:177] Creating the MacvlanNetwork rdmashared-net
+I0630 17:57:23.433691  987013 macvlannetwork.go:135] Checking if MacvlanNetwork rdmashared-net exists
+I0630 17:57:23.433703  987013 macvlannetwork.go:82] Collecting MacvlanNetwork object rdmashared-net
+I0630 17:57:23.585549  987013 deploy-nno-test.go:1004] MacvlanNetwork 'rdmashared-net' is successfully created
+I0630 17:57:23.585806  987013 macvlannetwork.go:102] Pulling existing MacvlanNetwork name: rdmashared-net
+I0630 17:57:23.585827  987013 macvlannetwork.go:135] Checking if MacvlanNetwork rdmashared-net exists
+I0630 17:57:23.585839  987013 macvlannetwork.go:82] Collecting MacvlanNetwork object rdmashared-net
+I0630 17:57:23.789016  987013 deploy-nno-test.go:1022] The MacvlanNetwork just created has name:  rdmashared-net
+I0630 17:57:23.789190  987013 deploy-nno-test.go:1024] The MacvlanNetwork just created marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "rdmashared-net",
+   "uid": "457d9533-23b2-4332-aaa0-9dc66b1d3d0b",
+   "resourceVersion": "21347211",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:56Z",
+   "annotations": {
+    "operator.macvlannetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.macvlannetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:macvlanNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:mode": {},
+       "f:mtu": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "rdma0",
+   "mode": "bridge",
+   "mtu": 1500,
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.2.0/24\", \"gateway\": \"192.168.2.1\"}"
+  },
+  "status": {
+   "state": "ready",
+   "macvlanNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/rdmashared-net"
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "rdmashared-net",
+   "uid": "457d9533-23b2-4332-aaa0-9dc66b1d3d0b",
+   "resourceVersion": "21347211",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:56Z",
+   "annotations": {
+    "operator.macvlannetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.macvlannetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:macvlanNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:mode": {},
+       "f:mtu": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "rdma0",
+   "mode": "bridge",
+   "mtu": 1500,
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.2.0/24\", \"gateway\": \"192.168.2.1\"}"
+  },
+  "status": {
+   "state": "ready",
+   "macvlanNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/rdmashared-net"
+  }
+ }
+}
+I0630 17:57:23.789438  987013 deploy-nno-test.go:1032] Waiting for MacvlanNetwork to be ready
+I0630 17:57:23.789588  987013 macvlannetwork.go:102] Pulling existing MacvlanNetwork name: rdmashared-net
+I0630 17:57:23.789605  987013 macvlannetwork.go:135] Checking if MacvlanNetwork rdmashared-net exists
+I0630 17:57:23.789617  987013 macvlannetwork.go:82] Collecting MacvlanNetwork object rdmashared-net
+I0630 17:57:23.993532  987013 networkwait.go:51] MacvlanNetwork rdmashared-net in now in ready state
+I0630 17:57:23.993606  987013 deploy-nno-test.go:1036] error waiting for MacvlanNetwork to be Ready:  <nil> 
+I0630 17:57:23.993963  987013 macvlannetwork.go:102] Pulling existing MacvlanNetwork name: rdmashared-net
+I0630 17:57:23.993986  987013 macvlannetwork.go:135] Checking if MacvlanNetwork rdmashared-net exists
+I0630 17:57:23.994000  987013 macvlannetwork.go:82] Collecting MacvlanNetwork object rdmashared-net
+I0630 17:57:24.147665  987013 deploy-nno-test.go:1048] The ready MacvlanNetwork just has name:  rdmashared-net
+I0630 17:57:24.147962  987013 deploy-nno-test.go:1050] The ready MacvlanNetwork just marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "rdmashared-net",
+   "uid": "457d9533-23b2-4332-aaa0-9dc66b1d3d0b",
+   "resourceVersion": "21347211",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:56Z",
+   "annotations": {
+    "operator.macvlannetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.macvlannetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:macvlanNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:mode": {},
+       "f:mtu": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "rdma0",
+   "mode": "bridge",
+   "mtu": 1500,
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.2.0/24\", \"gateway\": \"192.168.2.1\"}"
+  },
+  "status": {
+   "state": "ready",
+   "macvlanNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/rdmashared-net"
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "rdmashared-net",
+   "uid": "457d9533-23b2-4332-aaa0-9dc66b1d3d0b",
+   "resourceVersion": "21347211",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:56Z",
+   "annotations": {
+    "operator.macvlannetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.macvlannetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:macvlanNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:56Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:mode": {},
+       "f:mtu": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "rdma0",
+   "mode": "bridge",
+   "mtu": 1500,
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.2.0/24\", \"gateway\": \"192.168.2.1\"}"
+  },
+  "status": {
+   "state": "ready",
+   "macvlanNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/rdmashared-net"
+  }
+ }
+}
+I0630 17:57:24.148253  987013 deploy-nno-test.go:1058] Creating IPoIBNetwork from CSV almExamples
+I0630 17:57:24.148411  987013 ipoibnetwork.go:33] Initializing new IPoIBNetworkBuilder  structure from almExample string
+I0630 17:57:24.148825  987013 ipoibnetwork.go:58] Initializing new IPoIBNetworkBuilder  structure from almExample string with IPoIBNetwork name: example-ipoibnetwork
+I0630 17:57:24.148958  987013 deploy-nno-test.go:1063] Updating IPoIBNetworkBuilder object value passed in env variable 'example-ipoibnetwork'
+{"type": "whereabouts", "range": "192.168.6.225/24", "exclude": ["192.168.6.229/30", "192.168.6.236/32"]}
+I0630 17:57:24.149209  987013 deploy-nno-test.go:1068] Updating IPoIBNetworkBuilder object ipam and master with values passed in env variables
+I0630 17:57:24.149520  987013 ipoibnetwork.go:177] Creating the IPoIBNetwork example-ipoibnetwork
+I0630 17:57:24.149670  987013 ipoibnetwork.go:135] Checking if IPoIBNetwork example-ipoibnetwork exists
+I0630 17:57:24.149691  987013 ipoibnetwork.go:82] Collecting IPoIBNetwork object example-ipoibnetwork
+I0630 17:57:24.300684  987013 deploy-nno-test.go:1097] IPoIBNetwork 'example-ipoibnetwork' is successfully created
+I0630 17:57:24.300975  987013 ipoibnetwork.go:102] Pulling existing IPoIBNetwork name: example-ipoibnetwork
+I0630 17:57:24.300994  987013 ipoibnetwork.go:135] Checking if IPoIBNetwork example-ipoibnetwork exists
+I0630 17:57:24.301006  987013 ipoibnetwork.go:82] Collecting IPoIBNetwork object example-ipoibnetwork
+I0630 17:57:24.454609  987013 deploy-nno-test.go:1115] The IPoIBNetwork just created has name:  example-ipoibnetwork
+I0630 17:57:24.454806  987013 deploy-nno-test.go:1117] The IPoIBNetwork just created marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "example-ipoibnetwork",
+   "uid": "06c6b1b8-6656-4c32-9d2a-10c92124b34f",
+   "resourceVersion": "21347219",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:57Z",
+   "annotations": {
+    "operator.ipoibnetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.ipoibnetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:ipoibNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "ibp13s0",
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.6.225/24\", \"exclude\": [\"192.168.6.229/30\", \"192.168.6.236/32\"]}"
+  },
+  "status": {
+   "state": "ready",
+   "ipoibNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/example-ipoibnetwork"
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "example-ipoibnetwork",
+   "uid": "06c6b1b8-6656-4c32-9d2a-10c92124b34f",
+   "resourceVersion": "21347219",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:57Z",
+   "annotations": {
+    "operator.ipoibnetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.ipoibnetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:ipoibNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "ibp13s0",
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.6.225/24\", \"exclude\": [\"192.168.6.229/30\", \"192.168.6.236/32\"]}"
+  },
+  "status": {
+   "state": "ready",
+   "ipoibNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/example-ipoibnetwork"
+  }
+ }
+}
+I0630 17:57:24.455061  987013 deploy-nno-test.go:1125] Waiting for IPoIBNetwork to be ready
+I0630 17:57:24.455234  987013 ipoibnetwork.go:102] Pulling existing IPoIBNetwork name: example-ipoibnetwork
+I0630 17:57:24.455258  987013 ipoibnetwork.go:135] Checking if IPoIBNetwork example-ipoibnetwork exists
+I0630 17:57:24.455280  987013 ipoibnetwork.go:82] Collecting IPoIBNetwork object example-ipoibnetwork
+I0630 17:57:24.607829  987013 networkwait.go:72] IPoIBNetwork example-ipoibnetwork in now in ready state
+I0630 17:57:24.607890  987013 deploy-nno-test.go:1129] error waiting for IPoIBNetwork to be Ready:  <nil> 
+I0630 17:57:24.608168  987013 ipoibnetwork.go:102] Pulling existing IPoIBNetwork name: example-ipoibnetwork
+I0630 17:57:24.608189  987013 ipoibnetwork.go:135] Checking if IPoIBNetwork example-ipoibnetwork exists
+I0630 17:57:24.608201  987013 ipoibnetwork.go:82] Collecting IPoIBNetwork object example-ipoibnetwork
+I0630 17:57:24.760773  987013 deploy-nno-test.go:1141] The ready IPoIBNetwork just has name:  example-ipoibnetwork
+I0630 17:57:24.760971  987013 deploy-nno-test.go:1143] The ready IPoIBNetwork just marshalled in json: {
+ "Definition": {
+  "metadata": {
+   "name": "example-ipoibnetwork",
+   "uid": "06c6b1b8-6656-4c32-9d2a-10c92124b34f",
+   "resourceVersion": "21347219",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:57Z",
+   "annotations": {
+    "operator.ipoibnetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.ipoibnetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:ipoibNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "ibp13s0",
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.6.225/24\", \"exclude\": [\"192.168.6.229/30\", \"192.168.6.236/32\"]}"
+  },
+  "status": {
+   "state": "ready",
+   "ipoibNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/example-ipoibnetwork"
+  }
+ },
+ "Object": {
+  "metadata": {
+   "name": "example-ipoibnetwork",
+   "uid": "06c6b1b8-6656-4c32-9d2a-10c92124b34f",
+   "resourceVersion": "21347219",
+   "generation": 1,
+   "creationTimestamp": "2025-06-30T12:10:57Z",
+   "annotations": {
+    "operator.ipoibnetwork.mellanox.com/last-network-namespace": "default"
+   },
+   "managedFields": [
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:metadata": {
+       "f:annotations": {
+        ".": {},
+        "f:operator.ipoibnetwork.mellanox.com/last-network-namespace": {}
+       }
+      }
+     }
+    },
+    {
+     "manager": "manager",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:status": {
+       ".": {},
+       "f:ipoibNetworkAttachmentDef": {},
+       "f:state": {}
+      }
+     },
+     "subresource": "status"
+    },
+    {
+     "manager": "nvidianetwork.test",
+     "operation": "Update",
+     "apiVersion": "mellanox.com/v1alpha1",
+     "time": "2025-06-30T12:10:57Z",
+     "fieldsType": "FieldsV1",
+     "fieldsV1": {
+      "f:spec": {
+       ".": {},
+       "f:ipam": {},
+       "f:master": {},
+       "f:networkNamespace": {}
+      }
+     }
+    }
+   ]
+  },
+  "spec": {
+   "networkNamespace": "default",
+   "master": "ibp13s0",
+   "ipam": "{\"type\": \"whereabouts\", \"range\": \"192.168.6.225/24\", \"exclude\": [\"192.168.6.229/30\", \"192.168.6.236/32\"]}"
+  },
+  "status": {
+   "state": "ready",
+   "ipoibNetworkAttachmentDef": "k8s.cni.cncf.io/v1/namespaces/default/NetworkAttachmentDefinition/example-ipoibnetwork"
+  }
+ }
+}
+[38;5;10m•[0mI0630 17:57:24.761700  987013 deploy-nno-test.go:1163] 
+Starting RDMA connectivity test with ib_write_bw testcase
+I0630 17:57:24.761745  987013 deploy-nno-test.go:1166] Create ib_write_bw server workload pod 'rdma-shared-dev-server-ci-ethernet'
+I0630 17:57:24.921683  987013 deploy-nno-test.go:1176] ####### Server side - Debug:  err '<nil>'
+I0630 17:57:24.921737  987013 deploy-nno-test.go:1181] Successfully created RDMA ib_write_bw server workload pod 'rdma-shared-dev-server-ci-ethernet'
+I0630 17:57:24.921783  987013 deploy-nno-test.go:1185] Waiting for 4 minutes for the RDMA server to be running
+I0630 18:01:24.931465  987013 deploy-nno-test.go:1189] Get the interface net1 interface Ip address in the ib_write_bw server workload pod 'rdma-shared-dev-server-ci-ethernet'
+I0630 18:01:25.558434  987013 deploy-nno-test.go:1198] RDMA Server interface net1 IP address captured: '192.168.2.1'
+I0630 18:01:25.558540  987013 deploy-nno-test.go:1204] Create ib_write_bw Client workload pod 'rdma-shared-dev-client-ci-ethernet' and passing server ip address '192.168.2.1'
+I0630 18:01:25.761772  987013 deploy-nno-test.go:1215] ####### Client side - Debug:  err '<nil>'
+I0630 18:01:25.761842  987013 deploy-nno-test.go:1220] RDMA Client workload pod 'rdma-shared-dev-client-ci-ethernet' was successfully created in namespace 'default' and passed server IP Address '192.168.2.1'
+I0630 18:01:25.761930  987013 deploy-nno-test.go:1226] Waiting for 7 minutes for the RDMA ib_write_bw tests to complete
+I0630 18:08:25.772864  987013 deploy-nno-test.go:1231] Collect logs from RDMA ib_write_bw tests from server workload pod
+I0630 18:08:26.546042  987013 deploy-nno-test.go:1239] RDMA server logs collected: 
+'Argument 'withcuda' is: no
+Argument 'mode' is: server
+Argument 'mlxdevice' is: mlx5_0
+Argument 'interface' is: net1
+Argument 'serverip' is: 
+Architecture is aarch64
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+Adding repo from: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/aarch64/cuda-rhel9.repo
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+0 files removed
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+cuda-rhel9-aarch64                               83 kB/s |  32 kB     00:00    
+Red Hat Universal Base Image 9 (RPMs) - BaseOS  3.6 MB/s | 490 kB     00:00    
+Red Hat Universal Base Image 9 (RPMs) - AppStre  14 MB/s | 2.1 MB     00:00    
+Red Hat Universal Base Image 9 (RPMs) - CodeRea 1.6 MB/s | 173 kB     00:00    
+No match for argument: cuda-toolkit-12-8
+Error: Unable to find a match: cuda-toolkit-12-8
+Cloning into 'perftest'...
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'config'.
+libtoolize: copying file 'config/ltmain.sh'
+libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'm4'.
+libtoolize: copying file 'm4/libtool.m4'
+libtoolize: copying file 'm4/ltoptions.m4'
+libtoolize: copying file 'm4/ltsugar.m4'
+libtoolize: copying file 'm4/ltversion.m4'
+libtoolize: copying file 'm4/lt~obsolete.m4'
+libtoolize: 'AC_PROG_RANLIB' is rendered obsolete by 'LT_INIT'
+configure.ac:62: installing 'config/compile'
+configure.ac:66: installing 'config/config.guess'
+configure.ac:66: installing 'config/config.sub'
+configure.ac:36: installing 'config/install-sh'
+configure.ac:36: installing 'config/missing'
+Makefile.am: installing 'config/depcomp'
+Running configure without cuda header path
+configure: loading site script /usr/share/config.site
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for g++... no
+checking for c++... no
+checking for gpp... no
+checking for aCC... no
+checking for CC... no
+checking for cxx... no
+checking for cc++... no
+checking for cl.exe... no
+checking for FCC... no
+checking for KCC... no
+checking for RCC... no
+checking for xlC_r... no
+checking for xlC... no
+checking whether we are using the GNU C++ compiler... no
+checking whether g++ accepts -g... no
+checking dependency style of g++... none
+checking dependency style of gcc... gcc3
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... ./configure: line 7227: cmp: command not found
+./configure: line 7227: cmp: command not found
+
+checking how to truncate binary pipes... /usr/bin/sed -e 4q
+checking for mt... no
+checking if : is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... ./configure: line 9171: diff: command not found
+no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... no
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for ranlib... (cached) ranlib
+checking for ANSI C header files... (cached) yes
+checking infiniband/verbs.h usability... yes
+checking infiniband/verbs.h presence... yes
+checking for infiniband/verbs.h... yes
+checking for ibv_get_device_list in -libverbs... yes
+checking for rdma_create_event_channel in -lrdmacm... yes
+checking for umad_init in -libumad... yes
+checking for log in -lm... yes
+checking for ibv_reg_dmabuf_mr in -libverbs... yes
+checking pci/pci.h usability... yes
+checking pci/pci.h presence... yes
+checking for pci/pci.h... yes
+checking for pci_init in -lpci... yes
+checking for efadv_create_qp_ex in -lefa... yes
+checking for mlx5dv_create_qp in -lmlx5... yes
+checking for hnsdv_query_device in -lhns... yes
+./configure: line 18812: test: =: unary operator expected
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing man commands
+make  all-am
+make[1]: Entering directory '/root/perftest'
+ln -s .././man/perftest.1 man/ib_write_bw.1
+ln -s .././man/perftest.1 man/ib_read_bw.1
+ln -s .././man/perftest.1 man/ib_send_bw.1
+ln -s .././man/perftest.1 man/ib_atomic_bw.1
+ln -s .././man/perftest.1 man/ib_write_lat.1
+ln -s .././man/perftest.1 man/ib_read_lat.1
+ln -s .././man/perftest.1 man/ib_send_lat.1
+ln -s .././man/perftest.1 man/ib_atomic_lat.1
+ln -s .././man/perftest.1 man/raw_ethernet_bw.1
+ln -s .././man/perftest.1 man/raw_ethernet_lat.1
+ln -s .././man/perftest.1 man/raw_ethernet_burst_lat.1
+ln -s .././man/perftest.1 man/raw_ethernet_fs_rate.1
+  CC       src/send_bw.o
+  CC       src/multicast_resources.o
+  CC       src/get_clock.o
+  CC       src/perftest_communication.o
+  CC       src/perftest_parameters.o
+  CC       src/perftest_resources.o
+  CC       src/perftest_counters.o
+  CC       src/host_memory.o
+  CC       src/mmap_memory.o
+  CC       src/raw_ethernet_resources.o
+  CC       src/send_lat.o
+  CC       src/write_lat.o
+  CC       src/write_bw.o
+  CC       src/read_lat.o
+  CC       src/read_bw.o
+  CC       src/atomic_lat.o
+  CC       src/atomic_bw.o
+  CC       src/raw_ethernet_send_bw.o
+  CC       src/raw_ethernet_send_lat.o
+  CC       src/raw_ethernet_send_burst_lat.o
+  CC       src/raw_ethernet_fs_rate.o
+src/perftest_resources.c:1561:17: warning: 'get_device_vendor' defined but not used [-Wunused-function]
+ 1561 | static uint32_t get_device_vendor(struct ibv_context *context)
+      |                 ^~~~~~~~~~~~~~~~~
+  AR       libperftest.a
+  CCLD     ib_send_bw
+  CCLD     ib_send_lat
+  CCLD     ib_write_lat
+  CCLD     ib_write_bw
+  CCLD     ib_read_lat
+  CCLD     ib_read_bw
+  CCLD     ib_atomic_lat
+  CCLD     ib_atomic_bw
+  CCLD     raw_ethernet_bw
+  CCLD     raw_ethernet_lat
+  CCLD     raw_ethernet_burst_lat
+  CCLD     raw_ethernet_fs_rate
+make[1]: Leaving directory '/root/perftest'
+make[1]: Entering directory '/root/perftest'
+ /usr/bin/mkdir -p '/usr/bin'
+  /bin/sh ./libtool   --mode=install /usr/bin/install -c ib_send_bw ib_send_lat ib_write_lat ib_write_bw ib_read_lat ib_read_bw ib_atomic_lat ib_atomic_bw raw_ethernet_bw raw_ethernet_lat raw_ethernet_burst_lat raw_ethernet_fs_rate '/usr/bin'
+libtool: install: /usr/bin/install -c ib_send_bw /usr/bin/ib_send_bw
+libtool: install: /usr/bin/install -c ib_send_lat /usr/bin/ib_send_lat
+libtool: install: /usr/bin/install -c ib_write_lat /usr/bin/ib_write_lat
+libtool: install: /usr/bin/install -c ib_write_bw /usr/bin/ib_write_bw
+libtool: install: /usr/bin/install -c ib_read_lat /usr/bin/ib_read_lat
+libtool: install: /usr/bin/install -c ib_read_bw /usr/bin/ib_read_bw
+libtool: install: /usr/bin/install -c ib_atomic_lat /usr/bin/ib_atomic_lat
+libtool: install: /usr/bin/install -c ib_atomic_bw /usr/bin/ib_atomic_bw
+libtool: install: /usr/bin/install -c raw_ethernet_bw /usr/bin/raw_ethernet_bw
+libtool: install: /usr/bin/install -c raw_ethernet_lat /usr/bin/raw_ethernet_lat
+libtool: install: /usr/bin/install -c raw_ethernet_burst_lat /usr/bin/raw_ethernet_burst_lat
+libtool: install: /usr/bin/install -c raw_ethernet_fs_rate /usr/bin/raw_ethernet_fs_rate
+ /usr/bin/mkdir -p '/usr/bin'
+ /usr/bin/install -c run_perftest_loopback run_perftest_multi_devices '/usr/bin'
+ /usr/bin/mkdir -p '/usr/share/man/man1'
+ /usr/bin/install -c -m 644 ./man/ib_write_bw.1 ./man/ib_read_bw.1 ./man/ib_send_bw.1 ./man/ib_atomic_bw.1 ./man/ib_write_lat.1 ./man/ib_read_lat.1 ./man/ib_send_lat.1 ./man/ib_atomic_lat.1 ./man/raw_ethernet_bw.1 ./man/raw_ethernet_lat.1 ./man/raw_ethernet_burst_lat.1 ./man/raw_ethernet_fs_rate.1 man/perftest.1 '/usr/share/man/man1'
+make[1]: Leaving directory '/root/perftest'
+Checking input arguments for ib_write_bw in server mode
+Getting IP address of interface 'net1'
+Starting ib_write_bw server using net1 interface IP address '192.168.2.1'
+/usr/bin/ib_write_bw
+ibwarn: [3612] mad_rpc_open_port: client_register for mgmt 1 failed
+/builddir/build/BUILD/rdma-core-51.0/libibnetdisc/ibnetdisc.c:798; can't open MAD port ((null):0)
+/usr/sbin/ibnetdiscover: iberror: failed: discover failed
+ibwarn: [3617] mad_rpc_open_port: client_register for mgmt 1 failed
+/builddir/build/BUILD/rdma-core-51.0/libibnetdisc/ibnetdisc.c:798; can't open MAD port ((null):0)
+/usr/sbin/ibnetdiscover: iberror: failed: discover failed
+Infiniband device 'mlx5_0' port 1 status:
+	default gid:	 0000:0000:0000:0000:0000:0000:0000:0000
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 100 Gb/sec (4X EDR)
+	link_layer:	 Ethernet
+
+Infiniband device 'mlx5_1' port 1 status:
+	default gid:	 0000:0000:0000:0000:0000:0000:0000:0000
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 1: DOWN
+	phys state:	 3: Disabled
+	rate:		 40 Gb/sec (4X QDR)
+	link_layer:	 Ethernet
+
+Infiniband device 'mlx5_2' port 1 status:
+	default gid:	 0000:0000:0000:0000:0000:0000:0000:0000
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 100 Gb/sec (4X EDR)
+	link_layer:	 Ethernet
+
+Infiniband device 'mlx5_3' port 1 status:
+	default gid:	 0000:0000:0000:0000:0000:0000:0000:0000
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 1: DOWN
+	phys state:	 3: Disabled
+	rate:		 40 Gb/sec (4X QDR)
+	link_layer:	 Ethernet
+
+Running cmd: '/root/perftest/ib_write_bw -R -T 41 -s 65536 -F -x 3 -m 4096 --report_gbits -q 16 -D 60  -d mlx5_0 -p 10000 --source_ip 192.168.2.1'
+ WARNING: BW peak won't be measured in this run.
+
+************************************
+* Waiting for client to connect... *
+************************************
+Requested mtu is higher than active mtu 
+Changing to active mtu - 3
+---------------------------------------------------------------------------------------
+                    RDMA_Write BW Test
+ Dual-port       : OFF		Device         : mlx5_0
+ Number of qps   : 16		Transport type : IB
+ Connection type : RC		Using SRQ      : OFF
+ PCIe relax order: ON		Lock-free      : OFF
+ ibv_wr* API     : ON		Using DDP      : OFF
+ CQ Moderation   : 1
+ CQE Poll Batch  : 16
+ Mtu             : 1024[B]
+ Link type       : Ethernet
+ GID index       : 3
+ Max inline data : 0[B]
+ rdma_cm QPs	 : ON
+ Data ex. method : rdma_cm 	TOS    : 41
+---------------------------------------------------------------------------------------
+ Waiting for client rdma_cm QP to connect
+ Please run the same command with the IB/RoCE interface IP
+---------------------------------------------------------------------------------------
+ local address: LID 0000 QPN 0x01d2 PSN 0xce73df
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d3 PSN 0x5d19dd
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d4 PSN 0xe1263
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d5 PSN 0xed6576
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d6 PSN 0x75ed51
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d7 PSN 0xb126df
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d8 PSN 0xd7a852
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01d9 PSN 0x6992e3
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01da PSN 0xfe564b
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:02:01
+ local address: LID 0000 QPN 0x01db PSN 0xbc9d71
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:
+I0630 18:08:26.547565  987013 rdma-test.go:164] Matched Bandwidth Table:[65536      5296697          0.00               92.55  		     0.176534 65536 5296697 0.00 92.55 0.176534]
+I0630 18:08:26.547632  987013 deploy-nno-test.go:1250] Parsed and formatted RDMA server logs: 
+'{
+  "BW_Avg_Gbps": "92.55",
+  "BW_Peak_Gbps": "0.00",
+  "Bytes": "65536",
+  "CQ Moderation": "1",
+  "CQE Poll Batch": "16",
+  "Connection type": "RC",
+  "Device": "mlx5_0",
+  "Dual-port": "OFF",
+  "GID index": "3",
+  "Iterations": "5296697",
+  "Link type": "Ethernet",
+  "Lock-free": "OFF",
+  "Max inline data": "0[B]",
+  "MsgRate_Mpps": "0.176534",
+  "Mtu": "1024[B]",
+  "Number of qps": "16",
+  "PCIe relax order": "ON",
+  "TOS": "41",
+  "Test_Type": "RDMA_Write BW Test",
+  "Transport type": "IB",
+  "Using DDP": "OFF",
+  "Using SRQ": "OFF",
+  "ibv_wr* API": "ON",
+  "method": "rdma_cm",
+  "rdma_cm QPs": "ON"
+}'
+I0630 18:08:26.547663  987013 deploy-nno-test.go:1258] RDMA test validation has PASSED.  Successful test !
+[38;5;10m•[0m
+
+[38;5;10m[1mRan 2 of 2 Specs in 822.122 seconds[0m
+[38;5;10m[1mSUCCESS![0m -- [38;5;10m[1m2 Passed[0m | [38;5;9m[1m0 Failed[0m | [38;5;11m[1m0 Pending[0m | [38;5;14m[1m0 Skipped[0m
+PASS
+
+Ginkgo ran 1 suite in 13m48.013867784s
+Test Suite Passed

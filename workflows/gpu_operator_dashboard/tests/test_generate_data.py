@@ -4,9 +4,13 @@ import tempfile
 import unittest
 from unittest import mock, TestCase
 
+# Updated imports for refactored structure
+from workflows.common.operator_dashboard import (
+    merge_and_save_results, GPU_CONFIG, STATUS_SUCCESS, STATUS_FAILURE, STATUS_ABORTED
+)
 from workflows.gpu_operator_dashboard.fetch_ci_data import (
-    merge_and_save_results, OCP_FULL_VERSION, GPU_OPERATOR_VERSION,
-    STATUS_SUCCESS, STATUS_FAILURE, STATUS_ABORTED)
+    OCP_FULL_VERSION, GPU_OPERATOR_VERSION
+)
 
 # Testing final logic of generate_ci_dashboard.py which stores the JSON test data
 
@@ -41,7 +45,7 @@ class TestSaveToJson(TestCase):
         existing_data = {}
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         # Read the saved file and verify its contents
         with open(data_file, 'r') as f:
@@ -98,7 +102,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         # Read the saved file and verify its contents
         with open(data_file, 'r') as f:
@@ -144,7 +148,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)
@@ -185,7 +189,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)
@@ -228,7 +232,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)
@@ -268,7 +272,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)
@@ -309,7 +313,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         # Verify json.dump was called with the correct arguments
         mock_json_dump.assert_called_once()
@@ -341,7 +345,7 @@ class TestSaveToJson(TestCase):
 
         data_file = os.path.join(self.output_dir, self.test_file)
         # Apply limit of 3 bundle results
-        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=3)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=3, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)
@@ -385,7 +389,7 @@ class TestSaveToJson(TestCase):
         }
 
         data_file = os.path.join(self.output_dir, self.test_file)
-        merge_and_save_results(new_data, data_file, existing_data)
+        merge_and_save_results(new_data, data_file, existing_data, bundle_result_limit=None, config=GPU_CONFIG)
 
         with open(data_file, 'r') as f:
             saved_data = json.load(f)

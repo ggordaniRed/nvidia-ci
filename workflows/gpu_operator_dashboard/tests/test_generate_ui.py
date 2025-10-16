@@ -2,10 +2,14 @@ from unittest import TestCase
 from unittest.mock import patch
 from datetime import datetime, timezone
 
-from workflows.gpu_operator_dashboard.generate_ci_dashboard import (
-    build_bundle_info, build_catalog_table_rows, has_valid_semantic_versions, generate_test_matrix)
+# Updated imports for refactored structure
+from workflows.common.operator_dashboard import GPU_CONFIG, STATUS_ABORTED, STATUS_SUCCESS, STATUS_FAILURE
+from workflows.common.operator_dashboard_ui import (
+    build_bundle_info, build_catalog_table_rows, has_valid_semantic_versions, generate_test_matrix
+)
 from workflows.gpu_operator_dashboard.fetch_ci_data import (
-    OCP_FULL_VERSION, GPU_OPERATOR_VERSION, STATUS_ABORTED, STATUS_SUCCESS, STATUS_FAILURE)
+    OCP_FULL_VERSION, GPU_OPERATOR_VERSION
+)
 
 
 class TestBuildBundleInfo(TestCase):
@@ -175,7 +179,7 @@ class TestBuildBundleInfo(TestCase):
         # Mimic the filtering done in the UI generation:
         filtered_regular = [r for r in regular_results if r.get(
             "test_status") == "SUCCESS"]
-        html = build_catalog_table_rows(filtered_regular)
+        html = build_catalog_table_rows(filtered_regular, GPU_CONFIG)
 
         # Ensure that each GPU version appears only once in the HTML.
         self.assertEqual(html.count("24.6.2"), 1)
@@ -220,7 +224,7 @@ class TestBuildBundleInfo(TestCase):
             }
         ]
 
-        html = build_catalog_table_rows(regular_results)
+        html = build_catalog_table_rows(regular_results, GPU_CONFIG)
 
         # Should contain both GPU versions
         self.assertIn("23.9.0", html)
@@ -265,7 +269,7 @@ class TestBuildBundleInfo(TestCase):
             }
         ]
 
-        html = build_catalog_table_rows(regular_results)
+        html = build_catalog_table_rows(regular_results, GPU_CONFIG)
 
         # Should show as successful and link to the success URL
         self.assertIn('class="success-link">23.9.0</a>', html)
@@ -289,7 +293,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertTrue(has_valid_semantic_versions(valid_result))
+        self.assertTrue(has_valid_semantic_versions(valid_result, GPU_CONFIG))
 
     def test_gpu_version_with_suffix(self):
         """Test that GPU versions with suffix (like bundle) are handled correctly."""
@@ -301,7 +305,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertTrue(has_valid_semantic_versions(result_with_suffix))
+        self.assertTrue(has_valid_semantic_versions(result_with_suffix, GPU_CONFIG))
 
     def test_invalid_ocp_version(self):
         """Test that invalid OCP versions are rejected."""
@@ -313,7 +317,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertFalse(has_valid_semantic_versions(invalid_ocp_result))
+        self.assertFalse(has_valid_semantic_versions(invalid_ocp_result, GPU_CONFIG))
 
     def test_invalid_gpu_version(self):
         """Test that invalid GPU operator versions are rejected."""
@@ -325,7 +329,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertFalse(has_valid_semantic_versions(invalid_gpu_result))
+        self.assertFalse(has_valid_semantic_versions(invalid_gpu_result, GPU_CONFIG))
 
     def test_missing_versions(self):
         """Test that missing version fields are rejected."""
@@ -336,7 +340,7 @@ class TestSemanticVersionValidation(TestCase):
             "prow_job_url": "https://example.com/job1",
             "job_timestamp": "1712345678"
         }
-        self.assertFalse(has_valid_semantic_versions(missing_ocp))
+        self.assertFalse(has_valid_semantic_versions(missing_ocp, GPU_CONFIG))
 
         # Missing GPU version
         missing_gpu = {
@@ -345,7 +349,7 @@ class TestSemanticVersionValidation(TestCase):
             "prow_job_url": "https://example.com/job1",
             "job_timestamp": "1712345678"
         }
-        self.assertFalse(has_valid_semantic_versions(missing_gpu))
+        self.assertFalse(has_valid_semantic_versions(missing_gpu, GPU_CONFIG))
 
     def test_empty_versions(self):
         """Test that empty version fields are rejected."""
@@ -357,7 +361,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertFalse(has_valid_semantic_versions(empty_versions))
+        self.assertFalse(has_valid_semantic_versions(empty_versions, GPU_CONFIG))
 
     def test_master_version_rejected(self):
         """Test that 'master' GPU version is rejected for regular results."""
@@ -369,7 +373,7 @@ class TestSemanticVersionValidation(TestCase):
             "job_timestamp": "1712345678"
         }
 
-        self.assertFalse(has_valid_semantic_versions(master_version))
+        self.assertFalse(has_valid_semantic_versions(master_version, GPU_CONFIG))
 
     def test_integration_with_table_rows(self):
         """Test that invalid semantic versions are filtered out in the full processing flow."""
@@ -403,14 +407,14 @@ class TestSemanticVersionValidation(TestCase):
         ]
 
         # Filter results using the same logic as the main code
-        filtered_results = [r for r in regular_results if has_valid_semantic_versions(r)]
+        filtered_results = [r for r in regular_results if has_valid_semantic_versions(r, GPU_CONFIG)]
 
         # Only the valid entry should remain
         self.assertEqual(len(filtered_results), 1)
         self.assertEqual(filtered_results[0]["prow_job_url"], "https://example.com/valid")
 
         # Generate HTML table with filtered results
-        html = build_catalog_table_rows(filtered_results)
+        html = build_catalog_table_rows(filtered_results, GPU_CONFIG)
 
         # Should contain the valid entry
         self.assertIn("23.9.0", html)
@@ -425,7 +429,7 @@ class TestSemanticVersionValidation(TestCase):
 class TestGenerateTestMatrix(TestCase):
     """Test cases for the main generate_test_matrix function with separated data structure."""
 
-    @patch('workflows.gpu_operator_dashboard.generate_ci_dashboard.load_template')
+    @patch('workflows.common.operator_dashboard_ui.load_template')
     def test_generate_test_matrix_with_separated_structure(self, mock_load_template):
         """Test that generate_test_matrix works with the new separated bundle_tests and release_tests structure."""
         # Mock templates
@@ -488,7 +492,9 @@ class TestGenerateTestMatrix(TestCase):
         }
 
         # Generate HTML
-        html_result = generate_test_matrix(ocp_data)
+        import os
+        templates_dir = os.path.join(os.path.dirname(__file__), "..", "templates")
+        html_result = generate_test_matrix(ocp_data, GPU_CONFIG, templates_dir)
 
         # Verify that the function ran without errors and generated HTML
         self.assertIsInstance(html_result, str)
@@ -523,7 +529,7 @@ class TestGenerateTestMatrix(TestCase):
         # Verify last updated timestamp is added
         self.assertIn('Last updated:', html_result)
 
-    @patch('workflows.gpu_operator_dashboard.generate_ci_dashboard.load_template')
+    @patch('workflows.common.operator_dashboard_ui.load_template')
     def test_generate_test_matrix_with_empty_sections(self, mock_load_template):
         """Test generate_test_matrix with empty bundle_tests and release_tests sections."""
         # Mock templates
@@ -543,14 +549,16 @@ class TestGenerateTestMatrix(TestCase):
         }
 
         # Should not raise an error
-        html_result = generate_test_matrix(ocp_data)
+        import os
+        templates_dir = os.path.join(os.path.dirname(__file__), "..", "templates")
+        html_result = generate_test_matrix(ocp_data, GPU_CONFIG, templates_dir)
 
         # Should generate basic HTML structure even with no data
         self.assertIsInstance(html_result, str)
         self.assertIn('<html>', html_result)
         self.assertIn('4.15', html_result)
 
-    @patch('workflows.gpu_operator_dashboard.generate_ci_dashboard.load_template')
+    @patch('workflows.common.operator_dashboard_ui.load_template')
     def test_generate_test_matrix_filters_invalid_versions(self, mock_load_template):
         """Test that generate_test_matrix properly filters out invalid semantic versions from release tests."""
         # Mock templates
@@ -602,7 +610,9 @@ class TestGenerateTestMatrix(TestCase):
             }
         }
 
-        html_result = generate_test_matrix(ocp_data)
+        import os
+        templates_dir = os.path.join(os.path.dirname(__file__), "..", "templates")
+        html_result = generate_test_matrix(ocp_data, GPU_CONFIG, templates_dir)
 
         # Should contain the valid entry
         self.assertIn('23.9.0', html_result)

@@ -1,10 +1,10 @@
 """
-GPU Operator Dashboard - UI Generation (Refactored)
+NNO Dashboard - UI Generation (Refactored)
 
 This module uses the shared operator_dashboard_ui module to generate
-HTML dashboards for GPU operator test results.
+HTML dashboards for Network operator test results. Almost identical to GPU!
 
-Original: 276 lines
+Original: 276 lines  
 Refactored: ~25 lines (91% reduction!)
 """
 
@@ -12,8 +12,8 @@ import os
 from workflows.common import operator_dashboard as dashboard
 from workflows.common import operator_dashboard_ui as ui
 
-# Use GPU-specific configuration
-CONFIG = dashboard.GPU_CONFIG
+# Use NNO-specific configuration (ONLY DIFFERENCE from GPU!)
+CONFIG = dashboard.NNO_CONFIG
 
 # Get templates directory path
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -21,11 +21,11 @@ _TEMPLATES_DIR = os.path.join(_CURRENT_DIR, "templates")
 
 # Re-export constants for backward compatibility
 OCP_FULL_VERSION = CONFIG.ocp_version_field
-GPU_OPERATOR_VERSION = CONFIG.version_field_name
+NNO_OPERATOR_VERSION = CONFIG.version_field_name
 
 
 def main():
-    """Main entry point for GPU dashboard UI generation."""
+    """Main entry point for NNO dashboard UI generation."""
     parser = ui.create_ui_argument_parser(CONFIG)
     args = parser.parse_args()
     
@@ -35,4 +35,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

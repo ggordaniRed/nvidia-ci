@@ -34,6 +34,8 @@ jobs:
         run: |
           echo "DASHBOARD_DATA_FILEPATH=${DASHBOARD_OUTPUT_DIR}/gpu_operator_matrix.json" >> "$GITHUB_ENV"
           echo "DASHBOARD_HTML_FILEPATH=${DASHBOARD_OUTPUT_DIR}/gpu_operator_matrix.html" >> "$GITHUB_ENV"
+          echo "DASHBOARD_DATA_NNO_FILEPATH=${DASHBOARD_OUTPUT_DIR}/nno_operator_matrix.json" >> "$GITHUB_ENV"
+          echo "DASHBOARD_HTML_NNO_FILEPATH=${DASHBOARD_OUTPUT_DIR}/nno_operator_matrix.html" >> "$GITHUB_ENV"
           echo "GH_PAGES_BRANCH=${{ github.event.inputs.gh_pages_branch || 'gh-pages' }}" >> "$GITHUB_ENV"
         env:
           DASHBOARD_OUTPUT_DIR: ${{ env.DASHBOARD_OUTPUT_DIR }}
@@ -87,6 +89,26 @@ jobs:
             python -m workflows.gpu_operator_dashboard.generate_ci_dashboard \
               --dashboard_data_filepath "${{ env.DASHBOARD_DATA_FILEPATH }}" \
               --dashboard_html_filepath "${{ env.DASHBOARD_HTML_FILEPATH }}"
+          fi
+      - name: Fetch CI NNO Data
+        run: |
+          echo "Processing PR: ${{ steps.determine_pr.outputs.PR_NUMBER }}"
+          python -m workflows.nno_dashboard.fetch_ci_data \
+            --pr_number "${{ steps.determine_pr.outputs.PR_NUMBER }}" \
+            --baseline_data_filepath "${{ env.DASHBOARD_DATA_NNO_FILEPATH }}" \
+            --merged_data_filepath "${{ env.DASHBOARD_DATA_NNO_FILEPATH }}"
+
+
+      - name: Generate HTML NNO Dashboard (only if JSON changed)
+        run: |
+          cd "${{ env.DASHBOARD_OUTPUT_DIR }}"
+          if [[ ${{ github.event_name }} == "pull_request_target" ]] && git diff --exit-code gpu_operator_matrix.json; then
+            echo "no changes"
+          else
+            cd "${{ github.workspace }}"
+            python -m workflows.nno_dashboard.generate_ci_dashboard \
+              --dashboard_data_filepath "${{ env.DASHBOARD_DATA_NNO_FILEPATH }}" \
+              --dashboard_html_filepath "${{ env.DASHBOARD_HTML_NNO_FILEPATH }}"
           fi
 
       - name: Deploy HTML to GitHub Pages

@@ -406,7 +406,7 @@ def process_tests_for_pr(pr_number: str, results_by_ocp: Dict[str, Dict[str, Any
 
     
     processed_count = 0
-
+    
     for pr_num, job_name, build_id in sorted(all_builds):
         
         if job_name.startswith("rehearse-"):
@@ -432,23 +432,33 @@ def process_tests_for_pr(pr_number: str, results_by_ocp: Dict[str, Dict[str, Any
 
         # Extract test flavor from job name
         test_flavor = extract_test_flavor_from_job_name(job_name)
-        
-        # Use actual OCP version from the result if available, otherwise use from job name
-        actual_ocp_version = result.ocp_full_version if result.has_exact_versions() else ocp_version
-        
+       
+       
+        actual_ocp_version = result.ocp_full_version if result.has_exact_versions() else None
+        if not actual_ocp_version:
+            continue
         # Convert infrastructure types like "doca4", "bare-metal" to actual OCP version if they were used as version
         # This handles legacy data where infrastructure type was mistakenly used as OCP version
         if actual_ocp_version in ["doca4", "bare-metal", "hosted"]:
-            logger.warning(f"Found infrastructure type '{actual_ocp_version}' as OCP version, using actual OCP version from result")
+            logger.warning(f"Found infrastructure type '{actual_ocp_version}' as OCP version in job {job_name}")
             # Try to get it from the result's ocp_full_version
             if hasattr(result, 'ocp_full_version') and result.ocp_full_version and result.ocp_full_version not in ["doca4", "bare-metal", "hosted"]:
                 actual_ocp_version = result.ocp_full_version
+                logger.info(f"  -> Resolved to OCP version: {actual_ocp_version}")
             else:
                 # Use the version from job name if it's not an infrastructure type
                 if ocp_version not in ["doca4", "bare-metal", "hosted"]:
                     actual_ocp_version = ocp_version
+                    logger.info(f"  -> Using OCP version from path: {actual_ocp_version}")
                 else:
-                    actual_ocp_version = "Unknown"
+                    # Skip this result if we can't determine a valid OCP version
+                    logger.warning(f"  -> Skipping result - cannot determine valid OCP version for job {job_name}")
+                    continue
+        
+        # Validate that we have a proper OCP version (should start with digit and contain dots)
+        if not actual_ocp_version or not actual_ocp_version[0].isdigit() or '.' not in actual_ocp_version:
+            logger.warning(f"Invalid OCP version '{actual_ocp_version}' for job {job_name}, skipping")
+            continue
         
         # Initialize OCP version entry if needed
         results_by_ocp.setdefault(actual_ocp_version, {

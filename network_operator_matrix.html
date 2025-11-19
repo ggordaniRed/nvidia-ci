@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Matrix: NVIDIA Network Operator on Red Hat OpenShift</title>
+  <title>Test Matrix: NVIDIA GPU Operator on Red Hat OpenShift</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <h2>Test Matrix: NVIDIA Network Operator on Red Hat OpenShift</h2>
+  <h2>Test Matrix: NVIDIA GPU Operator on Red Hat OpenShift</h2>
 
   <script>
     function sortTable(column, tableId) {
@@ -35,14 +35,60 @@
     }
   </script>
 
-
 <div class="toc">
     <div class="ocp-version-header">OpenShift Versions</div>
-    
+    <a href="#ocp-doca4">doca4</a>, <a href="#ocp-bare-metal">bare-metal</a>
 </div>
-      <div class="last-updated">
-    Last updated: 2025-11-19 13:18:33 UTC
+      <a id="ocp-doca4"></a>
+  <div class="ocp-version-container">
+    <div class="ocp-version-header">
+      OpenShift doca4
+    </div>
+    
+    <div class="section-label">From operator catalog</div>
+    <table id="table-doca4-regular">
+      <thead>
+        <tr>
+          <th>OpenShift</th>
+          <th>NVIDIA GPU Operator</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="version-cell">4.17.16</td>
+          <td><a href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/test-platform-results/pr-logs/pull/openshift_release/67673/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-doca4-nvidia-network-operator-legacy-sriov-rdma/1961127149603655680/artifacts/nvidia-network-operator-legacy-sriov-rdma/network-operator-e2e" target="_blank" class="success-link">25.4.0</a></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </div>  <a id="ocp-bare-metal"></a>
+  <div class="ocp-version-container">
+    <div class="ocp-version-header">
+      OpenShift bare-metal
+    </div>
+    
+    <div class="section-label">From operator catalog</div>
+    <table id="table-bare-metal-regular">
+      <thead>
+        <tr>
+          <th>OpenShift</th>
+          <th>NVIDIA GPU Operator</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="version-cell">4.17.16</td>
+          <td><a href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/test-platform-results/pr-logs/pull/openshift_release/67673/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-bare-metal-nvidia-network-operator-bare-metal-e2e-doca4-latest/1959960542336520192" target="_blank" class="failed-link">25.4.0 (Failed)</a></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </div>  <div class="last-updated">
+    Last updated: 2025-11-19 14:09:04 UTC
   </div>
 </body>
 </html>
-

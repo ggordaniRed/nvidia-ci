@@ -1,1 +1,34 @@
-{}
+{
+    "bare-metal": {
+        "notes": [],
+        "bundle_tests": [],
+        "release_tests": [
+            {
+                "ocp_full_version": "4.17.16",
+                "gpu_operator_version": "25.4.0",
+                "test_status": "FAILURE",
+                "prow_job_url": "https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/test-platform-results/pr-logs/pull/openshift_release/67673/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-bare-metal-nvidia-network-operator-bare-metal-e2e-doca4-latest/1959960542336520192",
+                "job_timestamp": 1756128257
+            }
+        ],
+        "job_history_links": [
+            "https://prow.ci.openshift.org/job-history/gs/test-platform-results/pr-logs/directory/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-bare-metal-nvidia-network-operator-bare-metal-e2e-doca4-latest"
+        ]
+    },
+    "doca4": {
+        "notes": [],
+        "bundle_tests": [],
+        "release_tests": [
+            {
+                "ocp_full_version": "4.17.16",
+                "gpu_operator_version": "25.4.0",
+                "test_status": "SUCCESS",
+                "prow_job_url": "https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/test-platform-results/pr-logs/pull/openshift_release/67673/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-doca4-nvidia-network-operator-legacy-sriov-rdma/1961127149603655680/artifacts/nvidia-network-operator-legacy-sriov-rdma/network-operator-e2e",
+                "job_timestamp": 1756406663
+            }
+        ],
+        "job_history_links": [
+            "https://prow.ci.openshift.org/job-history/gs/test-platform-results/pr-logs/directory/rehearse-67673-pull-ci-rh-ecosystem-edge-nvidia-ci-main-doca4-nvidia-network-operator-legacy-sriov-rdma"
+        ]
+    }
+}
